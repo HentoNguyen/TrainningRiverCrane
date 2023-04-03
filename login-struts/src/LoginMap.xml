@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LoginMapper">
+
+   <resultMap  id="UserResultMap" type="User">
+   		<result property="id" column="id"/>
+   		<result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="remember_token" column="remember_token"/>
+        <result property="verify_email" column="verify_email"/>
+        <result property="is_active" column="is_active"/>
+        <result property="is_delete" column="is_delete"/>
+        <result property="group_role" column="group_role"/>
+        <result property="last_login_at" column="last_login_at"/>
+        <result property="last_login_ip" column="last_login_ip"/>
+        <result property="created_at" column="created_at"/>
+        <result property="updated_at" column="updated_at"/>
+    </resultMap>
+    
+    
+    <select id="GetAll" resultMap="UserResultMap">
+                SELECT * FROM mst_users;
+    </select>
+    
+    <select id="GetAllPage" parameterType="int" resultMap="UserResultMap">
+               select * from mst_users order by id offset #{i} rows fetch next 2 rows only;
+    </select>
+    
+    	<select id="countUser" resultType="int">
+                SELECT count(id) FROM mst_users;
+    </select>
+
+    
+    <select id="findByEmail" resultMap="UserResultMap">
+                SELECT * FROM mst_users   
+                    WHERE email = #{email} ;
+    </select>
+    
+    <select id="findByEmailFind" resultMap="UserResultMap">
+                SELECT * FROM mst_users   
+                    WHERE email like #{email_find} ;
+    </select>
+    
+     <select id="findByName"  resultMap="UserResultMap">
+                SELECT * FROM mst_users   
+                    WHERE name like #{name_find};
+    </select>
+    
+    <select id="findByGroup"  resultMap="UserResultMap">
+                SELECT * FROM mst_users   
+                    WHERE group_role = #{group_role_find};
+    </select>
+    
+    <select id="findByActive"  resultMap="UserResultMap">
+                SELECT * FROM mst_users   
+                    WHERE is_active = #{is_active_find};
+    </select>
+    
+	<insert id="addUser" parameterType="User">
+                INSERT INTO mst_users(name,email,password,remember_token,verify_email,
+               		is_active,is_delete,group_role,last_login_at,last_login_ip,created_at,updated_at)
+                VALUES(#{name},#{email},#{password},#{remember_token},#{verify_email},#{is_active}
+                    ,#{is_delete},#{group_role},#{last_login_at},#{last_login_ip},#{created_at},#{updated_at});
+    </insert>
+    
+     <update id="updateUser" parameterType="User">
+                UPDATE mst_users
+                    SET     name= #{name}, password= #{password}, is_active= #{is_active},
+                    is_delete= #{is_delete},group_role= #{group_role},updated_at= #{updated_at}
+                    WHERE email= #{email}
+    </update>
+    
+     <delete id="deleteUser" parameterType="User"> 
+           UPDATE mst_users
+                    SET is_delete= #{is_delete}
+                    WHERE email = #{email}
+            
+    </delete> 
+    
+    <update id="updateLogin_at" parameterType="User"> 
+           UPDATE mst_users
+                    SET last_login_at= #{last_login_at}
+                    WHERE email = #{email}      
+    </update> 
+    
+     <update id="updateActive" parameterType="User"> 
+           UPDATE mst_users
+                    SET is_active= #{is_active}
+                    WHERE email = #{email}      
+    </update> 
+    
+    <!-- customer -->
+     <resultMap  id="CustomerResultMap" type="Customer">
+   		<result property="customer_id" column="customer_id"/>
+   		<result property="customer_name" column="customer_name"/>
+        <result property="email" column="email"/>
+        <result property="tel_num" column="tel_num"/>
+        <result property="address" column="address"/>
+        <result property="is_active" column="is_active"/>
+        <result property="created_at" column="created_at"/>
+        <result property="updated_at" column="updated_at"/>
+    </resultMap>
+ 
+	 <select id="GetAllCustomer" resultMap="CustomerResultMap">
+                SELECT * FROM mst_customer;
+    </select>
+    
+    <select id="GetAllPageCustomer" parameterType="int" resultMap="CustomerResultMap">
+               select * from mst_customer order by customer_id offset #{i} rows fetch next 2 rows only;
+    </select>
+    
+  	<select id="countCustomer" resultType="int">
+                SELECT count(customer_id) FROM mst_customer;
+    </select>
+    
+    <select id="findByEmailCustomer" resultMap="CustomerResultMap">
+                SELECT * FROM mst_customer   
+                    WHERE email = #{email} ;
+    </select>
+    
+    <select id="findByEmailFindCustomer" resultMap="CustomerResultMap">
+                SELECT * FROM mst_customer   
+                    WHERE email like #{email_find} ;
+    </select>
+    
+    
+     <select id="findByNameCustomer"  resultMap="CustomerResultMap">
+                SELECT * FROM mst_customer   
+                    WHERE customer_name like #{name_find};
+    </select>
+    
+    <select id="findByAddressCustomer"  resultMap="CustomerResultMap">
+                SELECT * FROM mst_customer   
+                    WHERE address = #{address_find};
+    </select>
+    
+    <select id="findByActiveCustomer"  resultMap="CustomerResultMap">
+                SELECT * FROM mst_customer   
+                    WHERE is_active = #{is_active_find};
+    </select>
+    
+   
+    
+	<insert id="addCustomer" parameterType="Customer">
+                INSERT INTO mst_customer(customer_name,email,tel_num,address,is_active, created_at,updated_at)
+                VALUES(#{customer_name},#{email},#{tel_num},#{address},#{is_active},#{created_at},#{updated_at});
+    </insert>
+   
+     <update id="updateCustomer" parameterType="Customer">
+                UPDATE mst_customer
+                    SET     customer_name= #{customer_name}, tel_num= #{tel_num}, address= #{address},
+                    is_active= #{is_active},updated_at= #{updated_at}
+                    WHERE email= #{email}
+    </update>
+
+    
+	<!-- Product -->
+	
+     <resultMap  id="ProductResultMap" type="Product">
+   		<result property="product_id" column="product_id"/>
+   		<result property="product_name" column="product_name"/>
+        <result property="product_image" column="product_image"/>
+        <result property="product_price" column="product_price"/>
+        <result property="is_sales" column="is_sales"/>
+        <result property="description" column="description"/>
+        <result property="created_at" column="created_at"/>
+        <result property="updated_at" column="updated_at"/>
+    </resultMap>
+ 
+	 <select id="GetAllProduct" resultMap="ProductResultMap">
+                SELECT * FROM mst_product;
+    </select>
+    
+    <select id="GetAllPageProduct" parameterType="int" resultMap="ProductResultMap">
+               select * from mst_product order by product_id offset #{i} rows fetch next 2 rows only;
+    </select>
+    
+   <select id="idMax" resultType="String">
+                SELECT MAX(product_id) FROM mst_product;
+    </select> 
+    
+    <select id="findByProductId" resultMap="ProductResultMap">
+                SELECT * FROM mst_product   
+                    WHERE product_id = #{product_id};
+    </select>
+    
+      <select id="findByNameProduct"  resultMap="ProductResultMap">
+                SELECT * FROM mst_product   
+                    WHERE product_name like #{name_find};
+    </select>
+    
+    <select id="findByActiveProduct"  resultMap="ProductResultMap">
+                SELECT * FROM mst_product   
+                    WHERE is_sales = #{is_safe_find};
+    </select>
+    
+     <select id="findByPrice"  resultMap="ProductResultMap">
+                SELECT * FROM mst_product   
+                    WHERE product_price BETWEEN #{price_first_find} AND #{price_end_find} 
+    </select>
+    
+    <select id="countPro" resultType="int">
+                SELECT count(product_id) FROM mst_product;
+    </select>
+    
+    <insert id="addProduct" parameterType="Product">
+    		<!-- <selectKey keyProperty="product_id" resultType="java.lang.String" order="AFTER">
+			    SELECT CONCAT('SP', LPAD(COALESCE(SUBSTR(MAX(product_id), 3), 0) + 1, 2, '0')) as product_id
+			    FROM mst_product
+			  </selectKey> -->
+    
+                INSERT INTO mst_product(product_id, product_name,product_image,product_price,is_sales,description, created_at,updated_at)
+                VALUES(#{product_id},#{product_name},#{product_image},#{product_price},#{is_sales},#{description},#{created_at},#{updated_at});
+    </insert>
+    
+      <update id="updateProduct" parameterType="Product">
+                UPDATE mst_product
+                    SET     product_name= #{product_name}, product_image= #{product_image}, product_price= #{product_price},
+                    is_sales= #{is_sales},description= #{description},updated_at= #{updated_at}
+                    WHERE product_id= #{product_id}
+    </update>
+    
+    
+     <delete id="deleteProduct" parameterType="Product"> 
+             DELETE FROM mst_product
+                    WHERE product_id = #{product_id}
+                
+    </delete> 
+    
+ <!-- 
+  
+ 
+    <select id="checklogin" resultMap="UserResultMap">
+                SELECT name FROM mst_users   
+                    WHERE email = #{email} AND password = #{password};
+    </select>
+     <select id="checklogin" resultMap="LoginResultMap">
+                SELECT name FROM structUser   
+                    WHERE email = #{email} AND password = #{password};
+    </select>
+    
+    <select id="GetAll" resultMap="LoginResultMap">
+                SELECT * FROM structUser;
+    </select>
+    
+     <select id="findById" resultMap="LoginResultMap">
+                SELECT * FROM structUser   
+                    WHERE email = #{email};
+    </select>
+    
+    
+    
+    
+    
+    -->
+
+</mapper>  

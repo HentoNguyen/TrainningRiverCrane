@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>  
+   <constant name="struts.devMode" value="true" />
+   <package name="loginaction" namespace="/" extends="struts-default">
+ 
+      <action name="loginaction" 
+         class="com.login.action.login" 
+         method="checklogin">
+          <result name="success">/success.jsp</result>
+          <result name="input" >/index.jsp</result>
+      </action>
+      
+       <action name="logout" 
+         class="com.login.action.login" 
+         method="logout"> 
+          <result name="success">/index.jsp</result>
+      </action>
+      <!--  
+      <action name="themmoi" > 
+          <result>/add.jsp</result>
+      </action>-->
+      
+      <action name="add" class="com.login.action.login" 
+         method="AddUser" > 
+          <result name="success">/success.jsp</result>
+          <result name="input">/add.jsp</result>
+      </action>
+      <!--  -->
+       <action name="updateform"
+         class="com.login.action.login" > 
+         <result >/update.jsp</result>
+      </action> 
+      
+      
+     <action name="update" class="com.login.action.login" 
+         method="UpdateUser" > 
+          <result name="success">/success.jsp</result>  
+          <result name="error">/update.jsp</result>
+      </action>
+      
+       <action name="delete" 
+         class="com.login.action.login"
+        method="deleteUser"> 
+         <result name="success">/success.jsp</result>
+      </action> 
+     
+       <action name="updateActivity" class="com.login.action.login" 
+         method="updateActive" > 
+          <result name="success">/success.jsp</result>  
+      </action>
+      
+      
+     <action name="timkiem" class="com.login.action.login" 
+         method="timkiem"> 
+          <result name="success">/success.jsp</result>
+      </action>
+      
+      <action name="xoatim" class="com.login.action.login" 
+         method="xoatim"> 
+          <result name="success">/success.jsp</result>
+      </action>
+      
+      <action name="phantranglink" 
+         class="com.login.action.login"
+        method="phantrang"> 
+         <result name="success">/success.jsp</result>
+      </action> 
+      
+       <action name="phantrangnext" 
+         class="com.login.action.login"
+        method="phantrangnext"> 
+         <result name="success">/success.jsp</result>
+      </action> 
+      
+      <action name="phantrangback" 
+         class="com.login.action.login"
+        method="phantrangback"> 
+         <result name="success">/success.jsp</result>
+      </action> 
+      
+      
+      
+     <action name="User" class="com.login.action.login" 
+         method="reditUser" > 
+          <result name="success">/success.jsp</result>
+      </action>
+      
+      
+      
+   </package>
+   
+    <package name="Customer" namespace="/" extends="struts-default">
+    
+     <action name="Customer" class="com.login.action.Customer" 
+         method="reditCustomer" > 
+          <result name="success">/customer.jsp</result> 
+      </action>
+      
+       <action name="addCustomer" class="com.login.action.Customer" 
+         method="AddCustomer" > 
+          <result name="success">/customer.jsp</result>
+          <result name="input">/add.jsp</result>
+      </action>
+      
+       <action name="timkiemCustomer" class="com.login.action.Customer" 
+         method="timkiemCustomer"> 
+          <result name="success">/customer.jsp</result>
+      </action>
+      
+       <action name="updateformCustomer"
+         class="com.login.action.Customer" > 
+         <result >/updateCustomer.jsp</result>
+      </action> 
+      
+      
+     <action name="updateCustomer" class="com.login.action.Customer" 
+         method="UpdateCustomer" > 
+          <result name="success">/customer.jsp</result>  
+          <result name="error">/updateCustomer.jsp</result>
+      </action>
+     
+     <action name="Customer" class="com.login.action.Customer" 
+         method="reditCustomer" > 
+          <result name="success">/customer.jsp</result>
+      </action>
+      
+       <action name="phantranglinkCus" 
+         class="com.login.action.Customer"
+        method="phantrangCus"> 
+         <result name="success">/customer.jsp</result>
+      </action> 
+      
+       <action name="phantrangnextCus" 
+         class="com.login.action.Customer"
+        method="phantrangnextCus"> 
+         <result name="success">/customer.jsp</result>
+      </action> 
+      
+      <action name="phantrangbackCus" 
+         class="com.login.action.Customer"
+        method="phantrangbackCus"> 
+         <result name="success">/customer.jsp</result>
+      </action> 
+      
+      
+      <action name="xoatimCus" class="com.login.action.Customer" 
+         method="xoatim"> 
+          <result name="success">/customer.jsp</result>
+      </action>
+      
+     
+      
+   </package>
+   
+   
+   
+    <package name="Product" namespace="/" extends="struts-default">
+    
+     <action name="Product" class="com.login.action.Product" 
+         method="reditProduct" > 
+          <result name="success">/product.jsp</result> 
+      </action>
+      
+      
+       <action name="timkiemProduct" class="com.login.action.Product" 
+         method="timkiemProduct"> 
+          <result name="success">/product.jsp</result>
+      </action>
+      
+        <action name="themproduct" > 
+          <result>/add.jsp</result>
+      </action>
+      
+        <action name="addProduct" class="com.login.action.Product" 
+         method="AddProduct" > 
+          <result name="success">/product.jsp</result>
+          
+          <result name="input">/add.jsp</result>
+      </action>
+      
+      
+      <action name="updateformProduct" class="com.login.action.Product"  > 
+          <result>/updateProduct.jsp</result>
+      </action>
+      
+       <action name="updateProduct" class="com.login.action.Product" 
+         method="UpdateProduct" > 
+          <result name="success">/product.jsp</result>  
+          <result name="error">/updateProduct.jsp</result>
+      </action>
+      
+      
+      <action name="delete" 
+         class="com.login.action.Product"
+        method="deleteProduct"> 
+         <result name="success">/product.jsp</result>
+      </action> 
+      
+       <action name="xoatimPro" class="com.login.action.Product" 
+         method="xoatim"> 
+          <result name="success">/product.jsp</result>
+      </action>
+          
+       <action name="phantranglinkPro" 
+         class="com.login.action.Product"
+        method="phantrangPro"> 
+         <result name="success">/product.jsp</result>
+      </action> 
+      
+       <action name="phantrangnextPro" 
+         class="com.login.action.Product"
+        method="phantrangnextPro"> 
+         <result name="success">/product.jsp</result>
+      </action> 
+      
+      <action name="phantrangbackPro" 
+         class="com.login.action.Product"
+        method="phantrangbackPro"> 
+         <result name="success">/product.jsp</result>
+      </action> 
+      
+     <!--  <action name="doUpload" class="com.login.action.Product" 
+         method="doUpload" > 
+         	<interceptor-ref name="fileUpload">
+         		<param name="maximumSize">2097152</param>
+         		<param name="allowedTypes">
+         			img/png,img/gif,img/jpeg,img/jpg
+         		</param>
+         		
+         	</interceptor-ref>
+         	<interceptor-ref name="defaultStack"></interceptor-ref>
+          <result name="success">/add.jsp</result>
+          <result name="input">/add.jsp</result>
+      </action> -->
+      
+      
+   
+   </package>
+   
+</struts>
